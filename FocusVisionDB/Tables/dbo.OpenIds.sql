@@ -1,0 +1,13 @@
+CREATE TABLE [dbo].[OpenIds]
+(
+[OpenIdId] [int] NOT NULL IDENTITY(1, 1),
+[UserId] [int] NOT NULL,
+[OpenIdUrl] [nvarchar] (900) COLLATE Slovenian_CI_AS NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[OpenIds] ADD CONSTRAINT [PK_OpenIds] PRIMARY KEY CLUSTERED  ([OpenIdId]) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_FK_UserOpenId] ON [dbo].[OpenIds] ([UserId]) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[OpenIds] ADD CONSTRAINT [FK_UserOpenId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([UserId]) ON DELETE CASCADE
+GO
